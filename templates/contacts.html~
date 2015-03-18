@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Contacto{% endblock %}
+
+{% block body-article1%}
+<div class="wrap">
+	<div class="box">
+		<div>
+			<h2 class="letter_spacing">Contact <span>Form</span></h2>
+			<form id="ContactForm">
+				<div>
+					<div class="wrapper">
+						<span>Tu Nombre:</span>
+						<input type="text" class="input" >
+					</div>
+					<div class="wrapper">
+						<span>Tu E-mail:</span>
+						<input type="text" class="input" >								
+					</div>
+					<div class="textarea_box">
+						<span>Tu mensaje:</span>
+						<textarea name="textarea" cols="1" rows="1"></textarea>								
+					</div>
+					<center>
+					<a href="#" class="button1" onClick="document.getElementById('ContactForm').submit()">Send</a>
+					<a href="#" class="button1" onClick="document.getElementById('ContactForm').reset()">Clear</a>		
+					</center>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{% endfor %}

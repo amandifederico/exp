@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block paginador %} 
+	<div class="pagination">
+	    <span class="step-links">
+		{% if lista.has_previous %}
+		    <a href="?page={{ lista.previous_page_number }}">Anterior</a>
+		{% endif %}
+
+		<span class="current">
+		    Page {{ lista.number }} of {{ lista.paginator.num_pages }}.
+		</span>
+
+		{% if lista.has_next %}
+		    <a href="?page={{ lista.next_page_number }}">siguiente</a>
+		{% endif %}
+	    </span>
+	</div>
+{% endblock%}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}APISYS{% endblock %}
+
+{% block body-article1%}
+	<div class="wrap">
+		<div class="box">
+			<ul>
+				<li><a href='abmafiliado/0'>Carga y modificacion de afiliados</a></li>
+				<li>Menu2</li>
+				<li>Menu3</li>
+			</ul>
+		</div>
+	</div>
+{% endblock %}
+

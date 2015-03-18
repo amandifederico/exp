@@ -1,0 +1,13 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+{% load url from future %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+
+<p>{% trans "Gracias por usar el sistema, vuelva pronto." %}</p>
+
+<p><a href="/index">{% trans 'Volver a inicio' %}</a></p>
+
+{% endblock %}

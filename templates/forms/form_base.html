@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block script %}
+	{% include 'extrascript.html' %}
+	<script type="text/javascript"> Cufon.now(); </script>
+{% endblock %}
+
+{% block body-article1%}
+	<div class="wrap">
+		<div class="box">
+			{% block titulo-form %}
+			{% endblock %}
+			{% block contenido-form %}
+			{% endblock %}
+		</div>
+	</div>
+{% endblock %}
