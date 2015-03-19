@@ -1,10 +1,42 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<H1>Mesa de entradas</h1>
-	<p>Bienvenido, si usted es un usuario registrado podra dar uso al sistema de mesa de entrada. En caso de no contar con una cuenta de usuario 
-	solicite una al sector correspondiente para poder tener acceso al sistema.
-	</p>
-	<p><a class="btn btn-lg btn-success" href="/accounts/login" role="button">Inicie sesion</a></p>
+{% if user.is_active and user.is_staff %}
+	<div class="jumbotron">
+		<h2>Bienvenido</h2>
+		<h4>Opciones</h4>
+		<p><a class="btn btn-primary" href="#" role="button">Entrada</a></p>
+		<p><a class="btn btn-primary" href="#" role="button">Salida</a></p>
+		<p><a class="btn btn-primary" href="#" role="button">Movimientos</a></p>
+		<p><a class="btn btn-primary" href="#" role="button">Estadisticas</a></p>
+		<p><a class="btn btn-primary" href="#" role="button">Usuarios</a></p>
+	</div>
+{% else %}
+	<div class="jumbotron">
+		<h1>Mesa de entrada</h1>
+		<p class="lead">El sistema de mesa de entrada de [ORGANIZACION] le da la bienvenida, para poder hacer uso del sistema
+		por favor ingrese su nombre de <strong>usuario</strong> y <strong>contraseña</strong>. En caso de no contar con una cuenta de usuario
+		contactese con el sector correspondiente para que pueda facilitarse un acceso al sistema. </p>
+		<p><a class="btn btn-lg btn-success" href="/accounts/login/" role="button">Ingresar</a></p>
+	</div>
+{% endif %}
+<div class="row marketing">
+	<div class="col-lg-6">
+	  	<h4>Entradas/Salidas</h4>
+		<p>Las entradas de documentacion quedan registradas por este sistema, como asi tambien las salidas</p>
+
+	  	<h4>Seguimiento</h4>
+		<p>El registro de los movimientos de la documentacion, permite un control del seguimiento de los mismos</p>  
+	</div>
+
+	<div class="col-lg-6">
+		<h4>Control de gestion</h4>
+		<p>Conocer el estado del circuito administrativo le brinda la posibilidad de realizar un trabajo mas efectivo</p>
+
+		<h4>Estado</h4>
+		<p>Puede conocer el tiempo que un documento estuvo dentro del circuito administrativo desde su ingreso</p>
+	</div>
+</div>
+
 {%endblock%}
     

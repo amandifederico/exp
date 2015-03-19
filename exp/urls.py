@@ -8,5 +8,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^index/$', index),
+    url(r'^$', index),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
+    url(r'^registration/logged_out.html$',logout,name='logout'),
 )

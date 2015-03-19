@@ -13,7 +13,7 @@
 		<!-- ESTILOS -->
 		<link href="{{STATIC_URL}}css/bootstrap.min.css" rel="stylesheet"> 
 		<link href="{{STATIC_URL}}css/bootstrap-theme.min.css" rel="stylesheet"> 
-		<link href="{{STATIC_URL}}css/jumbotron.css" rel="stylesheet"> 
+		<link href="{{STATIC_URL}}css/jumbotron-narrow.css" rel="stylesheet"> 
 		<!-- JS -->
 		<script src="{{STATIC_URL}}js/jquery.min.js"></script>
 		<script src="{{STATIC_URL}}js/bootstrap.min.js"></script>
@@ -22,13 +22,12 @@
 	</head>
 
 	<body>
+		<div class="container">
 	        {% include 'header.html' %}
-                <div class="jumbotron">
-			<div class="container">
+
 			{% block content %}
 			{% endblock %}
-			</div>
+		{% include 'footer.html' %}
 		</div>
-		{% include 'header.html' %}
 	</body>
 </html>
