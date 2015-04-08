@@ -7,7 +7,7 @@ class DocumentoAdmin(admin.ModelAdmin):
     #raw_id_fields = []
     list_display = ['descripcion','tipo_doc','fecha_ing','destino','recepcion','adjunto']
     search_fields = ['descripcion','destino','recepcion','adjunto']
-    list_filter = ['tipo_doc', 'recepcion']
+    list_filter = ['tipo_doc', 'recepcion','proveedor']
     readonly_fields = ['recepcion']
     raw_id_fields =['adjunto']
     
@@ -41,4 +41,6 @@ class PaseAdmin(admin.ModelAdmin):
 admin.site.register(Documento,DocumentoAdmin)
 admin.site.register(Notas,NotasAdmin)
 admin.site.register(Departamento)
+admin.site.register(TipoDoc)
+admin.site.register(Proveedor)
 admin.site.register(Pase,PaseAdmin)

@@ -16,13 +16,36 @@ TIPO_DIRECCION = (
     ("SUE","Sueldos"),
 )
 
+class Proveedor(models.Model):
+    idprov = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=200)
+    direccion = models.CharField(max_length=200, null=True)
+
+    def __unicode__(self):
+        return force_unicode(self.nombre)
+
+class TipoDoc(models.Model):
+    idtdoc = models.AutoField(primary_key=True)
+    descrip = models.CharField(max_length=200)
+
+    def __unicode__(self):
+        return force_unicode(self.descrip)
+
+class Departamento(models.Model):
+    iddep = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=200)
+    
+    def __unicode__(self):
+        return force_unicode(self.nombre)
+
 class Documento(models.Model):
     identr = models.AutoField(primary_key=True)
     fecha_ing = models.DateField(verbose_name= "Fecha de Ingreso")
-    tipo_doc = models.CharField(max_length=3, choices=TIPO_DOCUMENTO, verbose_name='Tipo de documento')
+    tipo_doc = models.ForeignKey(TipoDoc,db_column='tipo_doc',verbose_name= "Tipo Documento")
     nro = models.CharField(max_length=200, null=True)
     descripcion = models.CharField(max_length=200)
-    destino = models.CharField(max_length=3, choices=TIPO_DIRECCION, verbose_name='Destino')
+    destino = models.ForeignKey(Departamento,db_column='destino',verbose_name= "Destino")
+    proveedor = models.ForeignKey(Proveedor,db_column='proveedor',verbose_name= "proveedor", null=True, blank=True)
     recepcion = models.ForeignKey(User, blank=True, null=True)
     adjunto = models.ForeignKey('self', blank=True, default= None, null=True)
     
@@ -39,13 +62,6 @@ class Notas(models.Model):
 
     def __unicode__(self):
         return force_unicode(self.descripcion)
-
-class Departamento(models.Model):
-    iddep = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=200)
-    
-    def __unicode__(self):
-        return force_unicode(self.nombre)
 
 class Pase(models.Model):
     idpase = models.AutoField(primary_key=True)
