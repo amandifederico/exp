@@ -21,8 +21,9 @@ class NotasAdmin(admin.ModelAdmin):
     search_fields = ['nro','direccion','usuario','descripcion']
 
 class PaseAdmin(admin.ModelAdmin):
-    list_display = ['documento']
-    
+    list_display = ['documento','fecha_ing','motivo','envio','origen','destino','recepcion','observacion','recibido']
+    raw_id_fields = ['documento']
+    search_fields = ['documento','destino','envio','destino','recepcion']
     def save_model(self, request, obj, form, change): 
         obj.user = request.user
         obj.save()
@@ -36,11 +37,15 @@ class PaseAdmin(admin.ModelAdmin):
         else:
             formset.save()
     """
+
+
     
 #admin.site.register()
 admin.site.register(Documento,DocumentoAdmin)
+admin.site.register(VwDocumentoContaduria,DocumentoAdmin)
 admin.site.register(Notas,NotasAdmin)
 admin.site.register(Departamento)
 admin.site.register(TipoDoc)
 admin.site.register(Proveedor)
 admin.site.register(Pase,PaseAdmin)
+admin.site.register(VwPaseContaduria,PaseAdmin)
