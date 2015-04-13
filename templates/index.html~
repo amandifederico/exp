@@ -4,7 +4,7 @@
 {% if user.is_active and user.is_staff %}
 	<div class="jumbotron">
 		<h2>Bienvenido</h2>
-		<h3>Opciones</h3>
+		<h4>Opciones</h4>
 		<p><a class="btn btn-primary" href="#" role="button">Entrada</a></p>
 		<p><a class="btn btn-primary" href="#" role="button">Salida</a></p>
 		<p><a class="btn btn-primary" href="#" role="button">Movimientos</a></p>

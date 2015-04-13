@@ -14,6 +14,7 @@
 			{% if user.is_active and user.is_staff %}
 				
 				<form class="navbar-form navbar-right">
+						{% csrf_token %}
 						<div class="form-group">
 							<p>Usuario: <strong>{% filter force_escape %}{% firstof user.username %}{% endfilter %}</strong> -</p>
 						</div>
