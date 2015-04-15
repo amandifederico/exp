@@ -41,15 +41,15 @@ class PaseAdmin(admin.ModelAdmin):
 
     
 #admin.site.register()
-admin.site.register(Documento)#,DocumentoAdmin)
-"""admin.site.register(VwDocumentoContaduria,DocumentoAdmin)
+admin.site.register(Documento,DocumentoAdmin)
+admin.site.register(VwDocumentoContaduria,DocumentoAdmin)
 admin.site.register(VwDocumentoTesoreria,DocumentoAdmin)
-admin.site.register(VwDocumentoMesaEnt,DocumentoAdmin)"""
+admin.site.register(VwDocumentoMesaEnt,DocumentoAdmin)
 #admin.site.register(Notas,NotasAdmin)
 admin.site.register(Departamento)
 admin.site.register(TipoDoc)
 admin.site.register(Proveedor)
 admin.site.register(Pase,PaseAdmin)
-"""admin.site.register(VwPaseContaduria,PaseAdmin)
+admin.site.register(VwPaseContaduria,PaseAdmin)
 admin.site.register(VwPaseTesoreria,PaseAdmin)
-admin.site.register(VwPaseMesaEnt,PaseAdmin)"""
+admin.site.register(VwPaseMesaEnt,PaseAdmin)

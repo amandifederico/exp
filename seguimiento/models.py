@@ -18,78 +18,83 @@ TIPO_DIRECCION = (
 
 class Proveedor(models.Model):
     idprov = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=200)
-    direccion = models.CharField(max_length=200, null=True)
+    nombre = models.CharField(max_length=300)
+    direccion = models.CharField(max_length=300, null=True)
 
     def __unicode__(self):
         return force_unicode(self.nombre)
 
     class Meta:
+        app_label = 'seguimiento'
         managed = False
         db_table = 'seguimiento_proveedor'
 
 
 class TipoDoc(models.Model):
     idtdoc = models.AutoField(primary_key=True)
-    descrip = models.CharField(max_length=200)
+    descrip = models.CharField(max_length=300)
 
     def __unicode__(self):
         return force_unicode(self.descrip)
 
     class Meta:
+        app_label = 'seguimiento'
         managed = False
         db_table = 'seguimiento_tipodoc'
 
 
 class Departamento(models.Model):
     iddep = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=200)
+    nombre = models.CharField(max_length=300)
     
     def __unicode__(self):
         return force_unicode(self.nombre)
 
     class Meta:
+        app_label = 'seguimiento'
         managed = False
         db_table = 'seguimiento_departamento'
 
 
 class Documento(models.Model):
-    identr = models.AutoField(primary_key=True)
+    iddoc = models.AutoField(primary_key=True)
     fecha_ing = models.DateField(verbose_name= "Fecha de Ingreso")
-    tipo_doc = models.ForeignKey(TipoDoc,db_column='idtdoc',verbose_name= "Tipo Documento")
+    tipo_doc = models.ForeignKey(TipoDoc,db_column='tipo_doc',verbose_name= "Tipo Documento")
     nro = models.CharField(max_length=200, null=True)
-    descripcion = models.CharField(max_length=200)
-    destino = models.ForeignKey(Departamento,db_column='iddep',verbose_name= "Destino")
-    proveedor = models.ForeignKey(Proveedor,db_column='idprov',verbose_name= "proveedor", null=True, blank=True)
-    recepcion = models.ForeignKey(User, blank=True, null=True)
-    adjunto = models.ForeignKey('self', blank=True, default= None, null=True)
+    descripcion = models.CharField(max_length=300)
+    destino = models.ForeignKey(Departamento,db_column='destino',verbose_name= "Destino")
+    proveedor = models.ForeignKey(Proveedor,db_column='proveedor',verbose_name= "proveedor", null=True, blank=True)
+    recepcion = models.ForeignKey(User,db_column='recepcion', blank=True, null=True)
+    adjunto = models.ForeignKey('self', db_column='adjunto', blank=True, default= None, null=True)
     
     def __unicode__(self):
         return force_unicode(self.descripcion)
 
     class Meta:
+        app_label = 'seguimiento'
         managed = False
         db_table = 'seguimiento_documento'
 
-
+"""
 class Notas(models.Model):
     idnot = models.AutoField(primary_key=True)
     nro = models.IntegerField()
     ejercicio = models.IntegerField()
     direccion = models.CharField(max_length=3, choices=TIPO_DIRECCION, verbose_name='Destino')
     usuario = models.CharField(max_length=200)
-    descripcion = models.CharField(max_length=200)
+    descripcion = models.CharField(max_length=300)
 
     def __unicode__(self):
         return force_unicode(self.descripcion)
 
     class Meta:
+        app_label = 'seguimiento'
         managed = False
         db_table = 'seguimiento_notas'
-
+"""
 class Pase(models.Model):
     idpase = models.AutoField(primary_key=True)
-    documento = models.ForeignKey(Documento,db_column='identr',verbose_name= "Documento")
+    documento = models.ForeignKey(Documento,db_column='documento',verbose_name= "Documento")
     fecha_ing = models.DateField(verbose_name= "Fecha de Ingreso")
     motivo = models.CharField(max_length=200)
     envio = models.ForeignKey(User, db_column='envio', related_name='envio', blank=True, null=True, default=None)
@@ -103,23 +108,24 @@ class Pase(models.Model):
         return force_unicode(self.motivo)
     
     class Meta:
+        app_label = 'seguimiento'
         managed = False
         db_table = 'seguimiento_pase'
 
-"""
+
 #=======================================================================================================
 #Contaduria
 #=======================================================================================================
 class VwDocumentoContaduria(models.Model):
-    identr = models.AutoField(primary_key=True)
+    iddoc = models.AutoField(primary_key=True)
     fecha_ing = models.DateField(verbose_name= "Fecha de Ingreso")
     tipo_doc = models.ForeignKey(TipoDoc,db_column='tipo_doc',verbose_name= "Tipo Documento")
     nro = models.CharField(max_length=200, null=True)
     descripcion = models.CharField(max_length=200)
     destino = models.ForeignKey(Departamento,db_column='destino',verbose_name= "Destino")
     proveedor = models.ForeignKey(Proveedor,db_column='proveedor',verbose_name= "proveedor", null=True, blank=True)
-    recepcion = models.ForeignKey(User, blank=True, null=True)
-    adjunto = models.ForeignKey('self', blank=True, default= None, null=True)
+    recepcion = models.ForeignKey(User, db_column='recepcion', related_name='recepcion',blank=True, null=True, default=None)
+    adjunto = models.ForeignKey('self', db_column='adjunto', blank=True, default= None, null=True)
 
     class Meta:
         managed = False
@@ -127,13 +133,13 @@ class VwDocumentoContaduria(models.Model):
 
 class VwPaseContaduria(models.Model):
     idpase = models.AutoField(primary_key=True)
-    documento = models.ForeignKey(Documento,db_column='identr',verbose_name= "Documento")
+    documento = models.ForeignKey(Documento,db_column='documento',verbose_name= "Documento")
     fecha_ing = models.DateField(verbose_name= "Fecha de Ingreso")
     motivo = models.CharField(max_length=200)
     envio = models.ForeignKey(User, db_column='envio', related_name='contaduria_envio', blank=True, null=True, default=None)
     origen = models.ForeignKey(Departamento,db_column='origen',verbose_name= "Origen", related_name="contaduria_origen", related_query_name="contaduria_origen")
     destino = models.ForeignKey(Departamento,db_column='destino',verbose_name= "Destino",related_name="contaduria_destino", related_query_name="contaduria_destino")
-    recepcion = models.ForeignKey(User, db_column='recepcion', related_name='contaduria_recepcion',blank=True, null=True, default=None)
+    recepcion = models.ForeignKey(User, db_column='recepcion', related_name='pase_contaduria_recepcion',blank=True, null=True, default=None)
     observacion = models.CharField(max_length=200,blank=True, null=True)
     recibido = models.BooleanField(default=False)
 
@@ -144,7 +150,7 @@ class VwPaseContaduria(models.Model):
 #Tesoreria
 #=======================================================================================================
 class VwDocumentoTesoreria(models.Model):
-    identr = models.AutoField(primary_key=True)
+    iddoc = models.AutoField(primary_key=True)
     fecha_ing = models.DateField(verbose_name= "Fecha de Ingreso")
     tipo_doc = models.ForeignKey(TipoDoc,db_column='tipo_doc',verbose_name= "Tipo Documento")
     nro = models.CharField(max_length=200, null=True)
@@ -152,7 +158,7 @@ class VwDocumentoTesoreria(models.Model):
     destino = models.ForeignKey(Departamento,db_column='destino',verbose_name= "Destino")
     proveedor = models.ForeignKey(Proveedor,db_column='proveedor',verbose_name= "proveedor", null=True, blank=True)
     recepcion = models.ForeignKey(User, blank=True, null=True)
-    adjunto = models.ForeignKey('self', blank=True, default= None, null=True)
+    adjunto = models.ForeignKey('self', db_column='adjunto', blank=True, default= None, null=True)
 
     class Meta:
         managed = False
@@ -160,7 +166,7 @@ class VwDocumentoTesoreria(models.Model):
 
 class VwPaseTesoreria(models.Model):
     idpase = models.AutoField(primary_key=True)
-    documento = models.ForeignKey(Documento,db_column='identr',verbose_name= "Documento")
+    documento = models.ForeignKey(Documento,db_column='documento',verbose_name= "Documento")
     fecha_ing = models.DateField(verbose_name= "Fecha de Ingreso")
     motivo = models.CharField(max_length=200)
     envio = models.ForeignKey(User, db_column='envio', related_name='tesoreria_envio', blank=True, null=True, default=None)
@@ -177,14 +183,14 @@ class VwPaseTesoreria(models.Model):
 #Mesa de entrada
 #=======================================================================================================
 class VwDocumentoMesaEnt(models.Model):
-    identr = models.AutoField(primary_key=True)
+    iddoc = models.AutoField(primary_key=True)
     fecha_ing = models.DateField(verbose_name= "Fecha de Ingreso")
     tipo_doc = models.ForeignKey(TipoDoc,db_column='tipo_doc',verbose_name= "Tipo Documento")
     nro = models.CharField(max_length=200, null=True)
     descripcion = models.CharField(max_length=200)
     destino = models.ForeignKey(Departamento,db_column='destino',verbose_name= "Destino")
     proveedor = models.ForeignKey(Proveedor,db_column='proveedor',verbose_name= "proveedor", null=True, blank=True)
-    recepcion = models.ForeignKey(User, blank=True, null=True)
+    recepcion = models.ForeignKey(User, db_column='recepcion', related_name='recepcion',blank=True, null=True, default=None)
     adjunto = models.ForeignKey('self', blank=True, default= None, null=True)
 
     class Meta:
@@ -193,7 +199,7 @@ class VwDocumentoMesaEnt(models.Model):
 
 class VwPaseMesaEnt(models.Model):
     idpase = models.AutoField(primary_key=True)
-    documento = models.ForeignKey(Documento,db_column='identr',verbose_name= "Documento")
+    documento = models.ForeignKey(Documento,db_column='documento',verbose_name= "Documento")
     fecha_ing = models.DateField(verbose_name= "Fecha de Ingreso")
     motivo = models.CharField(max_length=200)
     envio = models.ForeignKey(User, db_column='envio', related_name='mesa_ent_envio', blank=True, null=True, default=None)
@@ -206,5 +212,3 @@ class VwPaseMesaEnt(models.Model):
     class Meta:
         managed = False
         db_table = 'vw_pase_mesa_ent'
-
-"""
