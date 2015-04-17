@@ -124,7 +124,7 @@ class VwDocumentoContaduria(models.Model):
     descripcion = models.CharField(max_length=200)
     destino = models.ForeignKey(Departamento,db_column='destino',verbose_name= "Destino")
     proveedor = models.ForeignKey(Proveedor,db_column='proveedor',verbose_name= "proveedor", null=True, blank=True)
-    recepcion = models.ForeignKey(User, db_column='recepcion', related_name='recepcion',blank=True, null=True, default=None)
+    recepcion = models.ForeignKey(User, db_column='recepcion', related_name='doc_contaduria_recepcion',blank=True, null=True, default=None)
     adjunto = models.ForeignKey('self', db_column='adjunto', blank=True, default= None, null=True)
 
     class Meta:
@@ -146,6 +146,7 @@ class VwPaseContaduria(models.Model):
     class Meta:
         managed = False
         db_table = 'vw_pase_contaduria'
+
 #=======================================================================================================
 #Tesoreria
 #=======================================================================================================
@@ -190,7 +191,7 @@ class VwDocumentoMesaEnt(models.Model):
     descripcion = models.CharField(max_length=200)
     destino = models.ForeignKey(Departamento,db_column='destino',verbose_name= "Destino")
     proveedor = models.ForeignKey(Proveedor,db_column='proveedor',verbose_name= "proveedor", null=True, blank=True)
-    recepcion = models.ForeignKey(User, db_column='recepcion', related_name='recepcion',blank=True, null=True, default=None)
+    recepcion = models.ForeignKey(User, db_column='recepcion', related_name='doc_mesa_ent_recepcion',blank=True, null=True, default=None)
     adjunto = models.ForeignKey('self', blank=True, default= None, null=True)
 
     class Meta:
