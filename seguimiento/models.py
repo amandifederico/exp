@@ -75,23 +75,6 @@ class Documento(models.Model):
         managed = False
         db_table = 'seguimiento_documento'
 
-"""
-class Notas(models.Model):
-    idnot = models.AutoField(primary_key=True)
-    nro = models.IntegerField()
-    ejercicio = models.IntegerField()
-    direccion = models.CharField(max_length=3, choices=TIPO_DIRECCION, verbose_name='Destino')
-    usuario = models.CharField(max_length=200)
-    descripcion = models.CharField(max_length=300)
-
-    def __unicode__(self):
-        return force_unicode(self.descripcion)
-
-    class Meta:
-        app_label = 'seguimiento'
-        managed = False
-        db_table = 'seguimiento_notas'
-"""
 class Pase(models.Model):
     idpase = models.AutoField(primary_key=True)
     documento = models.ForeignKey(Documento,db_column='documento',verbose_name= "Documento")
@@ -114,7 +97,7 @@ class Pase(models.Model):
 
 
 #=======================================================================================================
-#Contaduria
+#Otros
 #=======================================================================================================
 class VwDocumentoOtros(models.Model):
     iddoc = models.AutoField(primary_key=True)
@@ -137,7 +120,7 @@ class VwPaseOtros(models.Model):
     fecha_ing = models.DateField(verbose_name= "Fecha de Ingreso")
     motivo = models.CharField(max_length=200)
     envio = models.ForeignKey(User, db_column='envio', related_name='otros_envio', blank=True, null=True, default=None)
-    origen = models.ForeignKey(Departamento,db_column='origen',verbose_name= "Origen", related_name="otros_origen", related_query_name="otros_origen")
+    origen = models.ForeignKey(Departamento,db_column='origen',verbose_name= "Origen", related_name="otros_origen", related_query_name="otros_origen", default=1)
     destino = models.ForeignKey(Departamento,db_column='destino',verbose_name= "Destino",related_name="otros_destino", related_query_name="otros_destino")
     recepcion = models.ForeignKey(User, db_column='recepcion', related_name='pase_otros_recepcion',blank=True, null=True, default=None)
     observacion = models.CharField(max_length=200,blank=True, null=True)
@@ -171,7 +154,7 @@ class VwPaseTesoreria(models.Model):
     fecha_ing = models.DateField(verbose_name= "Fecha de Ingreso")
     motivo = models.CharField(max_length=200)
     envio = models.ForeignKey(User, db_column='envio', related_name='tesoreria_envio', blank=True, null=True, default=None)
-    origen = models.ForeignKey(Departamento,db_column='origen',verbose_name= "Origen", related_name="tesoreria_origen", related_query_name="tesoreria_origen")
+    origen = models.ForeignKey(Departamento,db_column='origen',verbose_name= "Origen", related_name="tesoreria_origen", related_query_name="tesoreria_origen",default=2)
     destino = models.ForeignKey(Departamento,db_column='destino',verbose_name= "Destino",related_name="tesoreria_destino", related_query_name="tesoreria_destino")
     recepcion = models.ForeignKey(User, db_column='recepcion', related_name='tesoreria_recepcion',blank=True, null=True, default=None)
     observacion = models.CharField(max_length=200,blank=True, null=True)
@@ -192,7 +175,7 @@ class VwDocumentoMesaEnt(models.Model):
     destino = models.ForeignKey(Departamento,db_column='destino',verbose_name= "Destino")
     proveedor = models.ForeignKey(Proveedor,db_column='proveedor',verbose_name= "proveedor", null=True, blank=True)
     recepcion = models.ForeignKey(User, db_column='recepcion', related_name='doc_mesa_ent_recepcion',blank=True, null=True, default=None)
-    adjunto = models.ForeignKey('self', blank=True, default= None, null=True)
+    adjunto = models.ForeignKey('self', db_column='adjunto', blank=True, default= None, null=True)
 
     class Meta:
         managed = False
@@ -204,7 +187,7 @@ class VwPaseMesaEnt(models.Model):
     fecha_ing = models.DateField(verbose_name= "Fecha de Ingreso")
     motivo = models.CharField(max_length=200)
     envio = models.ForeignKey(User, db_column='envio', related_name='mesa_ent_envio', blank=True, null=True, default=None)
-    origen = models.ForeignKey(Departamento,db_column='origen',verbose_name= "Origen", related_name="mesa_ent_origen", related_query_name="mesa_ent_origen")
+    origen = models.ForeignKey(Departamento,db_column='origen',verbose_name= "Origen", related_name="mesa_ent_origen", related_query_name="mesa_ent_origen", default=3)
     destino = models.ForeignKey(Departamento,db_column='destino',verbose_name= "Destino",related_name="mesa_ent_destino", related_query_name="mesa_ent_destino")
     recepcion = models.ForeignKey(User, db_column='recepcion', related_name='mesa_ent_recepcion',blank=True, null=True, default=None)
     observacion = models.CharField(max_length=200,blank=True, null=True)
@@ -238,7 +221,7 @@ class VwPaseDireccion(models.Model):
     fecha_ing = models.DateField(verbose_name= "Fecha de Ingreso")
     motivo = models.CharField(max_length=200)
     envio = models.ForeignKey(User, db_column='envio', related_name='direccion_envio', blank=True, null=True, default=None)
-    origen = models.ForeignKey(Departamento,db_column='origen',verbose_name= "Origen", related_name="direccion_origen", related_query_name="direccion_origen")
+    origen = models.ForeignKey(Departamento,db_column='origen',verbose_name= "Origen", related_name="direccion_origen", related_query_name="direccion_origen",default=7)
     destino = models.ForeignKey(Departamento,db_column='destino',verbose_name= "Destino",related_name="direccion_destino", related_query_name="direccion_destino")
     recepcion = models.ForeignKey(User, db_column='recepcion', related_name='direccion_recepcion',blank=True, null=True, default=None)
     observacion = models.CharField(max_length=200,blank=True, null=True)
@@ -272,7 +255,7 @@ class VwPasePatrimonio(models.Model):
     fecha_ing = models.DateField(verbose_name= "Fecha de Ingreso")
     motivo = models.CharField(max_length=200)
     envio = models.ForeignKey(User, db_column='envio', related_name='patrimonio_envio', blank=True, null=True, default=None)
-    origen = models.ForeignKey(Departamento,db_column='origen',verbose_name= "Origen", related_name="patrimonio_origen", related_query_name="patrimonio_origen")
+    origen = models.ForeignKey(Departamento,db_column='origen',verbose_name= "Origen", related_name="patrimonio_origen", related_query_name="patrimonio_origen",default=6)
     destino = models.ForeignKey(Departamento,db_column='destino',verbose_name= "Destino",related_name="patrimonio_destino", related_query_name="patrimonio_destino")
     recepcion = models.ForeignKey(User, db_column='recepcion', related_name='patrimonio_recepcion',blank=True, null=True, default=None)
     observacion = models.CharField(max_length=200,blank=True, null=True)
@@ -306,12 +289,46 @@ class VwPaseLicitacionCompras(models.Model):
     fecha_ing = models.DateField(verbose_name= "Fecha de Ingreso")
     motivo = models.CharField(max_length=200)
     envio = models.ForeignKey(User, db_column='envio', related_name='lic_com_envio', blank=True, null=True, default=None)
-    origen = models.ForeignKey(Departamento,db_column='origen',verbose_name= "Origen", related_name="patrimonio_origen", related_query_name="patrimonio_origen")
-    destino = models.ForeignKey(Departamento,db_column='destino',verbose_name= "Destino",related_name="patrimonio_destino", related_query_name="patrimonio_destino")
-    recepcion = models.ForeignKey(User, db_column='recepcion', related_name='patrimonio_recepcion',blank=True, null=True, default=None)
+    origen = models.ForeignKey(Departamento,db_column='origen',verbose_name= "Origen", related_name="lic_com_origen", related_query_name="lic_com_origen",default=5)
+    destino = models.ForeignKey(Departamento,db_column='destino',verbose_name= "Destino",related_name="lic_com_destino", related_query_name="lic_com_destino")
+    recepcion = models.ForeignKey(User, db_column='recepcion', related_name='lic_com_recepcion',blank=True, null=True, default=None)
     observacion = models.CharField(max_length=200,blank=True, null=True)
     recibido = models.BooleanField(default=False)
 
     class Meta:
         managed = False
         db_table = 'vw_pase_lic_com'
+
+#=======================================================================================================
+#Ejecucion Presupuestaria
+#=======================================================================================================
+class VwDocumentoPresupuesto(models.Model):
+    iddoc = models.AutoField(primary_key=True)
+    fecha_ing = models.DateField(verbose_name= "Fecha de Ingreso")
+    tipo_doc = models.ForeignKey(TipoDoc,db_column='tipo_doc',verbose_name= "Tipo Documento")
+    nro = models.CharField(max_length=200, null=True)
+    descripcion = models.CharField(max_length=200)
+    destino = models.ForeignKey(Departamento,db_column='destino',verbose_name= "Destino")
+    proveedor = models.ForeignKey(Proveedor,db_column='proveedor',verbose_name= "proveedor", null=True, blank=True)
+    recepcion = models.ForeignKey(User, db_column='recepcion', related_name='doc_presupuesto_recepcion',blank=True, null=True, default=None)
+    adjunto = models.ForeignKey('self', blank=True, default= None, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'vw_documento_presupuesto'
+
+class VwPasePresupuesto(models.Model):
+    idpase = models.AutoField(primary_key=True)
+    documento = models.ForeignKey(Documento,db_column='documento',verbose_name= "Documento")
+    fecha_ing = models.DateField(verbose_name= "Fecha de Ingreso")
+    motivo = models.CharField(max_length=200)
+    envio = models.ForeignKey(User, db_column='envio', related_name='presupuesto_envio', blank=True, null=True, default=None)
+    origen = models.ForeignKey(Departamento,db_column='origen',verbose_name= "Origen", related_name="presupuesto_origen", related_query_name="presupuesto_origen",default=4)
+    destino = models.ForeignKey(Departamento,db_column='destino',verbose_name= "Destino",related_name="presupuesto_destino", related_query_name="presupuesto_destino")
+    recepcion = models.ForeignKey(User, db_column='recepcion', related_name='presupuesto_recepcion',blank=True, null=True, default=None)
+    observacion = models.CharField(max_length=200,blank=True, null=True)
+    recibido = models.BooleanField(default=False)
+
+    class Meta:
+        managed = False
+        db_table = 'vw_pase_presupuesto'
