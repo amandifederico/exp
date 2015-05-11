@@ -6,6 +6,7 @@ from models import *
 class DetallePaseInline(admin.TabularInline):
      model = Pase
      raw_id_fields = ('documento',)
+     readonly_fields = ['documento','fecha_ing','motivo','envio','origen','destino','recepcion','observacion','recibido']
 
 
 # Register your models here.
