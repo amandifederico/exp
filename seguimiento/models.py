@@ -15,7 +15,7 @@ TIPO_DIRECCION = (
     ("SG","Secretaria General"),
     ("SUE","Sueldos"),
 )
-
+#///////////////////////////////////////////////////////////////////
 class Proveedor(models.Model):
     idprov = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=300)
@@ -29,7 +29,7 @@ class Proveedor(models.Model):
         managed = False
         db_table = 'seguimiento_proveedor'
 
-
+#///////////////////////////////////////////////////////////////////
 class TipoDoc(models.Model):
     idtdoc = models.AutoField(primary_key=True)
     descrip = models.CharField(max_length=300)
@@ -42,7 +42,7 @@ class TipoDoc(models.Model):
         managed = False
         db_table = 'seguimiento_tipodoc'
 
-
+#///////////////////////////////////////////////////////////////////
 class Departamento(models.Model):
     iddep = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=300)
@@ -55,7 +55,7 @@ class Departamento(models.Model):
         managed = False
         db_table = 'seguimiento_departamento'
 
-
+#///////////////////////////////////////////////////////////////////
 class Documento(models.Model):
     iddoc = models.AutoField(primary_key=True)
     fecha_ing = models.DateField(verbose_name= "Fecha de Ingreso")
@@ -75,6 +75,9 @@ class Documento(models.Model):
         managed = False
         db_table = 'seguimiento_documento'
 
+
+
+#///////////////////////////////////////////////////////////////////
 class Pase(models.Model):
     idpase = models.AutoField(primary_key=True)
     documento = models.ForeignKey(Documento,db_column='documento',verbose_name= "Documento")
