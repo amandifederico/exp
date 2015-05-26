@@ -74,9 +74,7 @@ class Documento(models.Model):
         app_label = 'seguimiento'
         managed = False
         db_table = 'seguimiento_documento'
-
-
-
+        
 #///////////////////////////////////////////////////////////////////
 class Pase(models.Model):
     idpase = models.AutoField(primary_key=True)
