@@ -53,7 +53,7 @@ class PaseAdmin(admin.ModelAdmin):
     
 #admin.site.register()
 admin.site.register(Documento,DocumentoAdmin)
-admin.site.register(Expediente,DocumentoAdmin)
+#admin.site.register(Expediente,DocumentoAdmin)
 """admin.site.register(VwDocumentoOtros,DocumentoAdmin)
 admin.site.register(VwDocumentoTesoreria,DocumentoAdmin)
 admin.site.register(VwDocumentoMesaEnt,DocumentoAdmin)
