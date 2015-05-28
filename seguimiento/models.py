@@ -179,12 +179,13 @@ class VwDocumentoMesaEnt(models.Model):
     adjunto = models.ForeignKey('self', db_column='adjunto', blank=True, default= None, null=True)
 
     class Meta:
+        verbose_name = "Documento Mesa de Entrada"
         managed = False
         db_table = 'vw_documento_mesa_ent'
 
 class VwPaseMesaEnt(models.Model):
     idpase = models.AutoField(primary_key=True)
-    documento = models.ForeignKey(Documento,db_column='documento',verbose_name= "Documento")
+    documento = models.ForeignKey(VwDocumentoMesaEnt,db_column='documento',verbose_name= "Documento")
     fecha_ing = models.DateField(verbose_name= "Fecha de Ingreso")
     motivo = models.CharField(max_length=200)
     envio = models.ForeignKey(User, db_column='envio', related_name='mesa_ent_envio', blank=True, null=True, default=None)
@@ -195,6 +196,7 @@ class VwPaseMesaEnt(models.Model):
     recibido = models.BooleanField(default=False)
 
     class Meta:
+        verbose_name = "Pase Mesa Entrada"
         managed = False
         db_table = 'vw_pase_mesa_ent'
         
@@ -213,12 +215,13 @@ class VwDocumentoDireccion(models.Model):
     adjunto = models.ForeignKey('self', blank=True, default= None, null=True)
 
     class Meta:
+        verbose_name = "Documento Direccion"
         managed = False
         db_table = 'vw_documento_direccion'
 
 class VwPaseDireccion(models.Model):
     idpase = models.AutoField(primary_key=True)
-    documento = models.ForeignKey(Documento,db_column='documento',verbose_name= "Documento")
+    documento = models.ForeignKey(VwDocumentoDireccion,db_column='documento',verbose_name= "Documento")
     fecha_ing = models.DateField(verbose_name= "Fecha de Ingreso")
     motivo = models.CharField(max_length=200)
     envio = models.ForeignKey(User, db_column='envio', related_name='direccion_envio', blank=True, null=True, default=None)
@@ -229,6 +232,7 @@ class VwPaseDireccion(models.Model):
     recibido = models.BooleanField(default=False)
 
     class Meta:
+        verbose_name = "Pase Direccion"
         managed = False
         db_table = 'vw_pase_direccion'
         
