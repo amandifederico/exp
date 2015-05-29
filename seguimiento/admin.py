@@ -63,11 +63,11 @@ class DetallePaseInlineDirec(admin.TabularInline):
 # Register your models here.
 class DocumentoDirecAdmin(admin.ModelAdmin):
     #raw_id_fields = []
-    list_display = ['descripcion','tipo_doc','fecha_ing','destino','recepcion','adjunto']
-    search_fields = ['descripcion','destino','recepcion','adjunto']
+    list_display = ['descripcion','tipo_doc','fecha_ing','destino','recepcion']#,'adjunto']
+    search_fields = ['descripcion','destino','recepcion']#,'adjunto']
     list_filter = ['tipo_doc', 'recepcion','proveedor']
     readonly_fields = ['recepcion']
-    raw_id_fields =['adjunto']
+    #raw_id_fields =['adjunto']
 
     inlines = [DetallePaseInlineDirec]
     
@@ -102,7 +102,7 @@ class PaseAdmin(admin.ModelAdmin):
 
     
 #admin.site.register()
-admin.site.register(Documento)#,DocumentoAdmin)
+admin.site.register(Documento,DocumentoAdmin)
 #admin.site.register(Expediente,DocumentoAdmin)
 #admin.site.register(VwDocumentoOtros,DocumentoAdmin)
 #admin.site.register(VwDocumentoTesoreria,DocumentoAdmin)"""
