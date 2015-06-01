@@ -22,9 +22,7 @@ def index(request):
 #Por usr
 
 #Por proveedor
-#def docUsr(request,idusr):
-#    doc = Documento.object.filter(recepcion = idusr)
-    
+
 
 
 #////////////////////////////////////////////////////////////////////////////////////////
