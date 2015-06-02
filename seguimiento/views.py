@@ -14,17 +14,19 @@ def index(request):
 
 #////////////////////////////////////////////////////////////////////////////////////////
 #LISTADOS
+def listados(request):
+    return render_to_response('listados.html',context_instance=RequestContext(request))
 
 #Por tipo de documento
 
-#Por Fecha
-
-#Por usr
-
 #Por proveedor
+#def docProv(request,idprov):
+#    doc = Documento.object.filter(proveedor = idprov)
+#    return render_to_response('',context_instance=RequestContext(request))
+#Por usr
 #def docUsr(request,idusr):
 #    doc = Documento.object.filter(recepcion = idusr)
-    
+#    return render_to_response('',context_instance=RequestContext(request))
 
 
 #////////////////////////////////////////////////////////////////////////////////////////

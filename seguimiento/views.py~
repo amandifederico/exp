@@ -17,12 +17,13 @@ def index(request):
 
 #Por tipo de documento
 
-#Por Fecha
-
-#Por usr
-
 #Por proveedor
-
+#def docProv(request,idprov):
+#    doc = Documento.object.filter(proveedor = idprov)
+#Por usr
+#def docUsr(request,idusr):
+#    doc = Documento.object.filter(recepcion = idusr)
+    
 
 
 #////////////////////////////////////////////////////////////////////////////////////////
