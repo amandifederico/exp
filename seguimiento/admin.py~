@@ -83,8 +83,7 @@ class NotasAdmin(admin.ModelAdmin):
     search_fields = ['nro','direccion','usuario','descripcion']
 
 class PaseAdmin(admin.ModelAdmin):
-    list_display = ['documento','fecha_ing','motivo','envio','origen','destino','recepcion','observacion','recibido']
-    #list_display = ['motivo','recibido','destino']
+    list_display = ['fecha_ing','motivo','origen','destino','observacion','recibido']
     raw_id_fields = ['documento']
     #search_fields = ['documento','destino','envio','destino','recepcion']
     def save_model(self, request, obj, form, change): 

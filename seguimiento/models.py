@@ -111,6 +111,9 @@ class VwDocumentoOtros(models.Model):
     recepcion = models.ForeignKey(User, db_column='recepcion', related_name='doc_otros_recepcion',blank=True, null=True, default=None)
     adjunto = models.ForeignKey('self', db_column='adjunto', blank=True, default= None, null=True)
 
+    def __unicode__(self):
+        return force_unicode(self.descripcion)
+
     class Meta:
         managed = False
         db_table = 'vw_documento_otros'
@@ -126,7 +129,10 @@ class VwPaseOtros(models.Model):
     recepcion = models.ForeignKey(User, db_column='recepcion', related_name='pase_otros_recepcion',blank=True, null=True, default=None)
     observacion = models.CharField(max_length=200,blank=True, null=True)
     recibido = models.BooleanField(default=False)
-
+    
+    def __unicode__(self):
+        return force_unicode(self.motivo)
+    
     class Meta:
         managed = False
         db_table = 'vw_pase_otros'
@@ -145,6 +151,9 @@ class VwDocumentoTesoreria(models.Model):
     recepcion = models.ForeignKey(User, blank=True, null=True)
     adjunto = models.ForeignKey('self', db_column='adjunto', blank=True, default= None, null=True)
 
+    def __unicode__(self):
+        return force_unicode(self.descripcion)
+
     class Meta:
         managed = False
         db_table = 'vw_documento_tesoreria'
@@ -160,6 +169,9 @@ class VwPaseTesoreria(models.Model):
     recepcion = models.ForeignKey(User, db_column='recepcion', related_name='tesoreria_recepcion',blank=True, null=True, default=None)
     observacion = models.CharField(max_length=200,blank=True, null=True)
     recibido = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return force_unicode(self.motivo)
 
     class Meta:
         managed = False
@@ -177,7 +189,10 @@ class VwDocumentoMesaEnt(models.Model):
     proveedor = models.ForeignKey(Proveedor,db_column='proveedor',verbose_name= "proveedor", null=True, blank=True)
     recepcion = models.ForeignKey(User, db_column='recepcion', related_name='doc_mesa_ent_recepcion',blank=True, null=True, default=None)
     adjunto = models.ForeignKey('self', db_column='adjunto', blank=True, default= None, null=True)
-
+    
+    def __unicode__(self):
+        return force_unicode(self.descripcion)
+	
     class Meta:
         verbose_name = "Documento Mesa de Entrada"
         managed = False
@@ -195,10 +210,14 @@ class VwPaseMesaEnt(models.Model):
     observacion = models.CharField(max_length=200,blank=True, null=True)
     recibido = models.BooleanField(default=False)
 
+    def __unicode__(self):
+        return force_unicode(self.documento)
+
     class Meta:
         verbose_name = "Pase Mesa Entrada"
         managed = False
-        db_table = 'vw_pase_mesa_ent'
+        #db_table = 'vw_pase_mesa_ent'
+        db_table = 'seguimiento_pase'
         
 #=======================================================================================================
 #Direccion
@@ -213,7 +232,10 @@ class VwDocumentoDireccion(models.Model):
     proveedor = models.ForeignKey(Proveedor,db_column='proveedor',verbose_name= "proveedor", null=True, blank=True)
     recepcion = models.ForeignKey(User, db_column='recepcion', related_name='doc_direccion_recepcion',blank=True, null=True, default=None)
     #adjunto = models.ForeignKey('self', blank=True, default= None, null=True)
-
+    
+    def __unicode__(self):
+        return force_unicode(self.descripcion)
+	
     class Meta:
         verbose_name = "Documento Direccion"
         managed = False
@@ -231,10 +253,14 @@ class VwPaseDireccion(models.Model):
     observacion = models.CharField(max_length=200,blank=True, null=True)
     recibido = models.BooleanField(default=False)
 
+    def __unicode__(self):
+        return force_unicode(self.motivo)
+
     class Meta:
         verbose_name = "Pase Direccion"
         managed = False
-        db_table = 'vw_pase_direccion'
+        #db_table = 'vw_pase_direccion'
+        db_table = 'seguimiento_pase'
         
 #=======================================================================================================
 #Patrimonio
@@ -249,6 +275,9 @@ class VwDocumentoPatrimonio(models.Model):
     proveedor = models.ForeignKey(Proveedor,db_column='proveedor',verbose_name= "proveedor", null=True, blank=True)
     recepcion = models.ForeignKey(User, db_column='recepcion', related_name='doc_patrimonio_recepcion',blank=True, null=True, default=None)
     adjunto = models.ForeignKey('self', blank=True, default= None, null=True)
+
+    def __unicode__(self):
+        return force_unicode(self.descripcion)
 
     class Meta:
         managed = False
@@ -265,6 +294,9 @@ class VwPasePatrimonio(models.Model):
     recepcion = models.ForeignKey(User, db_column='recepcion', related_name='patrimonio_recepcion',blank=True, null=True, default=None)
     observacion = models.CharField(max_length=200,blank=True, null=True)
     recibido = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return force_unicode(self.motivo)
 
     class Meta:
         managed = False
@@ -284,6 +316,9 @@ class VwDocumentoLicitacionCompras(models.Model):
     recepcion = models.ForeignKey(User, db_column='recepcion', related_name='doc_lic_com_recepcion',blank=True, null=True, default=None)
     adjunto = models.ForeignKey('self', blank=True, default= None, null=True)
 
+    def __unicode__(self):
+        return force_unicode(self.descripcion)
+
     class Meta:
         managed = False
         db_table = 'vw_documento_lic_com'
@@ -299,6 +334,9 @@ class VwPaseLicitacionCompras(models.Model):
     recepcion = models.ForeignKey(User, db_column='recepcion', related_name='lic_com_recepcion',blank=True, null=True, default=None)
     observacion = models.CharField(max_length=200,blank=True, null=True)
     recibido = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return force_unicode(self.motivo)
 
     class Meta:
         managed = False
@@ -318,6 +356,9 @@ class VwDocumentoPresupuesto(models.Model):
     recepcion = models.ForeignKey(User, db_column='recepcion', related_name='doc_presupuesto_recepcion',blank=True, null=True, default=None)
     adjunto = models.ForeignKey('self', blank=True, default= None, null=True)
 
+    def __unicode__(self):
+        return force_unicode(self.descripcion)
+
     class Meta:
         managed = False
         db_table = 'vw_documento_presupuesto'
@@ -333,6 +374,9 @@ class VwPasePresupuesto(models.Model):
     recepcion = models.ForeignKey(User, db_column='recepcion', related_name='presupuesto_recepcion',blank=True, null=True, default=None)
     observacion = models.CharField(max_length=200,blank=True, null=True)
     recibido = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return force_unicode(self.motivo)
 
     class Meta:
         managed = False

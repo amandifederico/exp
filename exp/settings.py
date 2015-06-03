@@ -72,12 +72,12 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'prueba',
         'USER': 'postgres',
-        #'PASSWORD': 'sistemasavp',
-        'PASSWORD': 'postgres',
-        #'HOST': '200.70.33.249',
-        #'PORT': '3306',
-        'HOST': '192.168.2.100',
-        'PORT': '5432',
+        'PASSWORD': 'sistemasavp',
+        #'PASSWORD': 'postgres',
+        'HOST': '200.70.33.249',
+        'PORT': '3306',
+        #'HOST': '192.168.2.100',
+        #'PORT': '5432',
     }
 }    
 # Internationalization
