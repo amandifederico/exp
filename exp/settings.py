@@ -30,8 +30,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-    #'django_admin_bootstrapped.bootstrap3',
-    'bootstrap3',
+    'django_admin_bootstrapped.bootstrap3',
+    #'bootstrap3',
     'django_admin_bootstrapped',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -72,9 +72,12 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'prueba',
         'USER': 'postgres',
-        'PASSWORD': 'sistemasavp',
-        'HOST': '200.70.33.249',
-        'PORT': '3306',
+        #'PASSWORD': 'sistemasavp',
+        'PASSWORD': 'postgres',
+        #'HOST': '200.70.33.249',
+        #'PORT': '3306',
+        'HOST': '192.168.2.100',
+        'PORT': '5432',
     }
 }    
 # Internationalization

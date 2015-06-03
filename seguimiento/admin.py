@@ -5,7 +5,7 @@ from models import *
 #--------------------------------------------------------------------------------------------------------------------------------
 class DetallePaseInline(admin.TabularInline):
      model = Pase
-     raw_id_fields = ('documento',)
+     raw_id_fields = ['documento']
      readonly_fields = ['documento','fecha_ing','motivo','envio','origen','destino','recepcion','observacion','recibido']
      
      def has_add_permission(self, request, obj=None):
