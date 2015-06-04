@@ -39,8 +39,8 @@ class DetallePaseInlineMent(admin.TabularInline):
 # Register your models here.
 class DocumentoMentAdmin(admin.ModelAdmin):
     #raw_id_fields = []
-    list_display = ['descripcion','tipo_doc','fecha_ing','destino','recepcion','adjunto']
-    search_fields = ['descripcion','destino','recepcion','adjunto']
+    list_display = ['descripcion','nro','tipo_doc','fecha_ing','destino','recepcion','adjunto']
+    search_fields = ['descripcion','nro']
     list_filter = ['tipo_doc', 'recepcion','proveedor']
     readonly_fields = ['recepcion']
     raw_id_fields =['adjunto']
@@ -63,11 +63,11 @@ class DetallePaseInlineDirec(admin.TabularInline):
 # Register your models here.
 class DocumentoDirecAdmin(admin.ModelAdmin):
     #raw_id_fields = []
-    list_display = ['descripcion','tipo_doc','fecha_ing','destino','recepcion']#,'adjunto']
-    search_fields = ['descripcion','destino','recepcion']#,'adjunto']
+    list_display = ['descripcion','nro','tipo_doc','fecha_ing','destino','recepcion','adjunto']
+    search_fields = ['descripcion','nro']
     list_filter = ['tipo_doc', 'recepcion','proveedor']
     readonly_fields = ['recepcion']
-    #raw_id_fields =['adjunto']
+    raw_id_fields =['adjunto']
 
     inlines = [DetallePaseInlineDirec]
     
@@ -88,7 +88,7 @@ class PaseAdmin(admin.ModelAdmin):
     raw_id_fields = ['documento']
     #search_fields = ['documento','destino','envio','destino','recepcion']
     def save_model(self, request, obj, form, change): 
-        obj.user = request.user
+        obj.envio = request.user
         obj.save()
 
     """def save_formset(self, request, form, formset, change): 

@@ -189,7 +189,7 @@ class VwDocumentoMesaEnt(models.Model):
     proveedor = models.ForeignKey(Proveedor,db_column='proveedor',verbose_name= "proveedor", null=True, blank=True)
     recepcion = models.ForeignKey(User, db_column='recepcion', related_name='doc_mesa_ent_recepcion',blank=True, null=True, default=None)
     adjunto = models.ForeignKey('self', db_column='adjunto', blank=True, default= None, null=True)
-    
+
     def __unicode__(self):
         return force_unicode(self.descripcion)
 	
@@ -203,7 +203,7 @@ class VwPaseMesaEnt(models.Model):
     documento = models.ForeignKey(VwDocumentoMesaEnt,db_column='documento',verbose_name= "Documento")
     fecha_ing = models.DateField(verbose_name= "Fecha de Ingreso")
     motivo = models.CharField(max_length=200)
-    envio = models.ForeignKey(User, db_column='envio', related_name='mesa_ent_envio', blank=True, null=True, default=None)
+    envio = models.ForeignKey(User, db_column='envio', related_name='mesa_ent_envio', blank=True, null=True, default=None, editable=False)
     origen = models.ForeignKey(Departamento,db_column='origen',verbose_name= "Origen", related_name="mesa_ent_origen", related_query_name="mesa_ent_origen", default=3, editable=False)
     destino = models.ForeignKey(Departamento,db_column='destino',verbose_name= "Destino",related_name="mesa_ent_destino", related_query_name="mesa_ent_destino")
     recepcion = models.ForeignKey(User, db_column='recepcion', related_name='mesa_ent_recepcion',blank=True, null=True, default=None)
@@ -231,8 +231,8 @@ class VwDocumentoDireccion(models.Model):
     destino = models.ForeignKey(Departamento,db_column='destino',verbose_name= "Destino", default=7, editable=False)
     proveedor = models.ForeignKey(Proveedor,db_column='proveedor',verbose_name= "proveedor", null=True, blank=True)
     recepcion = models.ForeignKey(User, db_column='recepcion', related_name='doc_direccion_recepcion',blank=True, null=True, default=None)
-    #adjunto = models.ForeignKey('self', blank=True, default= None, null=True)
-    
+    adjunto = models.ForeignKey('self', db_column='adjunto', blank=True, default= None, null=True)
+
     def __unicode__(self):
         return force_unicode(self.descripcion)
 	
@@ -246,7 +246,7 @@ class VwPaseDireccion(models.Model):
     documento = models.ForeignKey(VwDocumentoDireccion,db_column='documento',verbose_name= "Documento")
     fecha_ing = models.DateField(verbose_name= "Fecha de Ingreso")
     motivo = models.CharField(max_length=200)
-    envio = models.ForeignKey(User, db_column='envio', related_name='direccion_envio', blank=True, null=True, default=None)
+    envio = models.ForeignKey(User, db_column='envio', related_name='direccion_envio', blank=True, null=True, default=None, editable=False)
     origen = models.ForeignKey(Departamento,db_column='origen',verbose_name= "Origen", related_name="direccion_origen", related_query_name="direccion_origen",default=7, editable=False)
     destino = models.ForeignKey(Departamento,db_column='destino',verbose_name= "Destino",related_name="direccion_destino", related_query_name="direccion_destino")
     recepcion = models.ForeignKey(User, db_column='recepcion', related_name='direccion_recepcion',blank=True, null=True, default=None)
