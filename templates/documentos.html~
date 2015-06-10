@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if user.is_active and user.is_staff %}
+	<div class="jumbotron">
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<center><p class="panel-title">Documentos en transito</p></center>
+			</div>
+			<div class="panel-body">
+				<table id="docs" class="display tabla" cellspacing="0" width="100%">
+                    			<thead>
+                        			<tr>
+			                            <th>Descripción</th>
+			                            <th>Tipo</th>
+			                            <th>Fecha Ingreso</th>
+			                            <th>Recepción</th>
+			                            <th>Adjunto</th>
+
+						</tr>
+                    			</thead>
+                    			<tbody>
+					{%for l in lista%}
+						<tr class="{% cycle 'row1' 'row2' %}">
+							<td>{{l.descripcion}}</td>
+							<td>{{l.tipo_doc}}</td>
+							<td>{{l.fecha_ing}}</td>
+							<td>{{l.recepcion}}</td>
+							<td>{{l.adjunto}}</td>
+						</tr>
+					{%endfor%}            
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+{%endblock%}
+    
