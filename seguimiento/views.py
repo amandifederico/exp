@@ -33,7 +33,9 @@ def estadisticas(request):
 #////////////////////////////////////////////////////////////////////////////////////////
 #LISTADOS
 def listados(request):
-    return render_to_response('listados.html',context_instance=RequestContext(request))
+    usr = User.objects.exclude(username = 'admin')
+
+    return render_to_response('listados.html',context_instance=RequestContext(request,{'usr':usr},))
 
 def listDocs(request):
     doc = Documento.objects.all()

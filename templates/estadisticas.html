@@ -72,12 +72,23 @@
 					</tr>
 					<tr> 
 						<td class="table-title">Listado por Usuarios</td>
-						<td></td>
 						<td>
-							<a class="btn btn-lg btn-primary" href="#" role="button">Listar »</a>
+						    <form method="post" enctype="text/plain">
+								<div class='col-md-6'>
+									<div class="form-group">
+										<select>
+											{%for u in usr%}
+												<option value='{{u.id}}'>{{u.username}}</option>
+											{%endfor%}
+										</select>
+									</div>
+								</div>
+							</form>
+						</td>
+						<td>
+							<input class="btn btn-lg btn-primary" type="button" name="filtrar" value="Listar »" Onclick="return filtroFechaAlta()">
 						</td>
 					</tr>
-					
 				</tbody>
 			</table>
 		</div>

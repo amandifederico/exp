@@ -2,13 +2,13 @@
 
 {% block content %}
 {% if user.is_active and user.is_staff %}
-	<div class="jumbotron">
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<center><p class="panel-title">Documentos en transito</p></center>
+	<div class="warp">
+		<div class="box">
+			<div>
+				<center><h1 class="panel-title">Documentos en transito</h1></center>
 			</div>
-			<div class="panel-body">
-				<table id="docs" class="display tabla" cellspacing="0" width="100%">
+
+				<table class="table table-striped">
                     			<thead>
                         			<tr>
 			                            <th>Descripción</th>
@@ -31,7 +31,8 @@
 					{%endfor%}            
 					</tbody>
 				</table>
-			</div>
+				{% include 'paginador.html' %}
+
 		</div>
 	</div>
 {%endif%} 
