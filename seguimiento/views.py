@@ -9,6 +9,7 @@ from django.template.response import TemplateResponse
 #---LOGOUT---
 # Create your views here.
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
+from datetime import *
 
 def paginar(objlist,peticion):
     """Metodo que pagina el resultado de un reporte de tipo listado """
@@ -27,11 +28,14 @@ def paginar(objlist,peticion):
 def index(request):
     return render_to_response('index.html',context_instance=RequestContext(request))
 
-def estadisticas(request):
-    return render_to_response('estadisticas.html',context_instance=RequestContext(request))
+
 
 #////////////////////////////////////////////////////////////////////////////////////////
 #LISTADOS
+def estadisticas(request):
+    usr = User.objects.exclude(username = 'admin')
+    return render_to_response('estadisticas.html',context_instance=RequestContext(request,{'usr':usr},))
+
 def listados(request):
     usr = User.objects.exclude(username = 'admin')
 
@@ -41,7 +45,24 @@ def listDocs(request):
     doc = Documento.objects.all()
     lista = paginar(doc,request)
     return render_to_response('documentos.html',context_instance=RequestContext(request,{'lista':lista},))
+
+def listDocsUsr(request, usr):
+    doc = Documento.objects.filter(recepcion = int(usr))
+    lista = paginar(doc,request)
+    return render_to_response('documentos.html',context_instance=RequestContext(request,{'lista':lista},))
     
+def listDocsFecha(request,d1,m1,a1,d2,m2,a2,opc):
+    fecha1 = datetime(int(a1),int(m1),int(d1))
+    fecha2 = datetime(int(a2),int(m2),int(d2))
+    if int(opc) == 1:
+        doc = Documento.objects.filter(fecha_ing__range = (fecha1,fecha2))
+        lista = paginar(doc,request)
+        return render_to_response('documentos.html',context_instance=RequestContext(request,{'lista':lista},))
+    elif int(opc) == 2:
+        pas = Pase.objects.filter(fecha_ing__range = (fecha1,fecha2))
+        lista = paginar(pas,request)
+        return render_to_response('pase.html',context_instance=RequestContext(request,{'lista':lista},))
+
 #Por tipo de documento
 
 #Por proveedor

@@ -14,8 +14,14 @@
 		<link href="{{STATIC_URL}}css/bootstrap.min.css" rel="stylesheet"> 
 		<link href="{{STATIC_URL}}css/bootstrap-theme.min.css" rel="stylesheet"> 
 		<link href="{{STATIC_URL}}css/jumbotron-narrow.css" rel="stylesheet"> 
+		<link rel="stylesheet" href="{{STATIC_URL}}css/bootstrap-datetimepicker.css" /> 
 		<!-- JS -->
-		<script src="{{STATIC_URL}}js/jquery.min.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/jquery.easing.1.3.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/bootstrap.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.11.1.min.js" ></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/moment-with-locales.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/bootstrap-datetimepicker.js"></script>
 		<script src="{{STATIC_URL}}js/bootstrap.min.js"></script>
 		{% block extra-scripts %}
 		{% endblock %}
@@ -24,7 +30,6 @@
 	<body>
 		<div class="container">
 	        {% include 'header.html' %}
-
 			{% block content %}
 			{% endblock %}
 		{% include 'footer.html' %}

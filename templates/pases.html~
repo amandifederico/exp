@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if user.is_active and user.is_staff %}
+	<div class="warp">
+		<div class="box">
+			<div>
+				<center><h1 class="panel-title">Documentos en transito</h1></center>
+			</div>
+
+				<table class="table table-striped">
+                    			<thead>
+                        			<tr>
+			                            <th>Descripción</th>
+			                            <th>Tipo</th>
+			                            <th>Fecha Ingreso</th>
+			                            <th>Recepción</th>
+			                            <th>Adjunto</th>
+
+						</tr>
+                    			</thead>
+                    			<tbody>
+					{%for l in lista%}
+						<tr class="{% cycle 'row1' 'row2' %}">
+							<td>{{l.descripcion}}</td>
+							<td>{{l.tipo_doc}}</td>
+							<td>{{l.fecha_ing}}</td>
+							<td>{{l.recepcion}}</td>
+							<td>{{l.adjunto}}</td>
+						</tr>
+					{%endfor%}            
+					</tbody>
+				</table>
+				{% include 'paginador.html' %}
+
+		</div>
+	</div>
+{%endif%} 
+{%endblock%}
+    

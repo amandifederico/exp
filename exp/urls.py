@@ -11,6 +11,8 @@ urlpatterns = patterns('',
     url(r'^$', index),
     url(r'^estadisticas/$', estadisticas),
     url(r'^listDocs/$', listDocs),
+    url(r'^listDocsUsr/(\d+)/$', listDocsUsr),
+    url(r'^listDocsFecha/(\d+)/(\d+)/(\d+)/(\d+)/(\d+)/(\d+)/(\d+)/$', listDocsFecha),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
     url(r'^registration/logged_out.html$',logout,name='logout'),
 )

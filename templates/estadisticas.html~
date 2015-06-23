@@ -3,98 +3,114 @@
 {% block content %}
 {% if user.is_active and user.is_staff %}
 	<div class="jumbotron">
-		<div class="table-responsive">
-			<table class="table table-hover listado">
-				<tbody>
-					<tr> 
-						<td class="table-title">Listado de Documentos</td>
-						<td></td>
-						<td>
-							<a class="btn btn-lg btn-primary" href="#" role="button">Listar »</a>
-						</td>
-					</tr>
-					<tr> 
-						<td>Listado documentos por fecha</td>
-						<td class="table-filters">
-							<form method="post" enctype="text/plain">
-								<div class='col-md-6'>
-									<div class="form-group">
-										<div class='input-group date' id='datetimepicker1'>
-											<input type='text' class="form-control" />
-											<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-											</span>
-										</div>
+		<table class="table table-hover listado">
+			<tbody>
+				<tr> 
+					<td class="table-title">Listado de Documentos</td>
+					<td></td>
+					<td>
+						<a class="btn btn-lg btn-primary" href="/listDocs" role="button">Listar »</a>
+					</td>
+				</tr>
+				<tr> 
+					<td>Listado documentos por fecha</td>
+					<td class="table-filters">
+						<form method="post" enctype="text/plain">
+							<div class='col-md-6'>
+								<div class="form-group">
+									<div class='input-group date' id='datetimepicker1'>
+										<input type='text' class="form-control" />
+										<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+										</span>
 									</div>
 								</div>
-								<div class='col-md-6'>
-									<div class="form-group">
-										<div class='input-group date' id='datetimepicker2'>
-											<input type='text' class="form-control" />
-											<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-											</span>
-										</div>
+							</div>
+							<div class='col-md-6'>
+								<div class="form-group">
+									<div class='input-group date' id='datetimepicker2'>
+										<input type='text' class="form-control" />
+										<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+										</span>
 									</div>
 								</div>
-							</form>
-						</td>
-						<td>
-							<input class="btn btn-lg btn-primary" type="button" name="filtrar" value="Listar »" Onclick="return filtroFechaNac()">
-						</td>
-					</tr>
-					<tr> 
-						<td>Listado por pases</td>
-						<td>
-							<form method="post" enctype="text/plain">
-								<div class='col-md-6'>
-									<div class="form-group">
-										<div class='input-group date' id='datetimepicker3'>
-											<input type='text' class="form-control" />
-											<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-											</span>
-										</div>
+							</div>
+						</form>
+					</td>
+					<td>
+						<input class="btn btn-lg btn-primary" type="button" name="filtrar" value="Listar »" Onclick="return filtroDocsFecha()">
+					</td>
+				</tr>
+				<tr> 
+					<td>Listado por pases</td>
+					<td>
+						<form method="post" enctype="text/plain">
+							<div class='col-md-6'>
+								<div class="form-group">
+									<div class='input-group date' id='datetimepicker3'>
+										<input type='text' class="form-control" />
+										<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+										</span>
 									</div>
 								</div>
-								<div class='col-md-6'>
-									<div class="form-group">
-										<div class='input-group date' id='datetimepicker4'>
-											<input type='text' class="form-control" />
-											<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-											</span>
-										</div>
+							</div>
+							<div class='col-md-6'>
+								<div class="form-group">
+									<div class='input-group date' id='datetimepicker4'>
+										<input type='text' class="form-control" />
+										<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+										</span>
 									</div>
 								</div>
-							</form>
+							</div>
+						</form>
 
-						</td>
-						<td>
-							<input class="btn btn-lg btn-primary" type="button" name="filtrar" value="Listar »" Onclick="return filtroFechaAlta()">
-						</td>
-					</tr>
-					<tr> 
-						<td class="table-title">Listado por Usuarios</td>
-						<td></td>
-						<td>
-							<a class="btn btn-lg btn-primary" href="#" role="button">Listar »</a>
-						</td>
-					</tr>
-					
-				</tbody>
-			</table>
-		</div>
+					</td>
+					<td>
+						<input class="btn btn-lg btn-primary" type="button" name="filtrar" value="Listar »" Onclick="return filtroPases()">
+					</td>
+				</tr>
+				<tr> 
+					<td class="table-title">Listado por Usuarios</td>
+					<td>
+					    <form method="post" enctype="text/plain">
+							<div class='col-md-6'>
+								<div class="form-group">
+									<select class="form-control" id="sel1" name="sel1">
+										{%for u in usr%}
+											<option value='{{u.id}}'>{{u.username}}</option>
+										{%endfor%}
+									</select>
+								</div>
+							</div>
+						</form>
+					</td>
+					<td>
+						<input class="btn btn-lg btn-primary" type="button" name="filtrar" value="Listar »" Onclick="return filtroDocUsr()">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
 	</div>
 	{% block script %}
 	<script>
-		function filtroFechaNac(){
+		function filtroDocsFecha(){
 			fn = $('#datetimepicker1').data('date')
 			fn2 = $('#datetimepicker2').data('date')
-			open("/listados/afil_f/"+fn+"/"+fn2+"/2","_self");
+			open("/listDocsFecha/"+fn+"/"+fn2+"/1/","_self");
+			return false;
+		}
+	
+		function filtroPases(){
+			fn = $('#datetimepicker1').data('date')
+			fn2 = $('#datetimepicker2').data('date')
+			open("/listDocsPases/"+fn+"/"+fn2+"/2/","_self");
 			return false;
 		}
 
-		function filtroFechaAlta(){
-			fn = $('#datetimepicker1').data('date')
-			fn2 = $('#datetimepicker2').data('date')
-			open("/listados/afil_f/"+fn+"/"+fn2+"/1","_self");
+		function filtroDocUsr(){
+			var usr = document.getElementById("sel1").value;
+			open("/listDocsUsr/"+usr+"/","_self");
 			return false;
 		}
 
@@ -103,15 +119,13 @@
 			$('#datetimepicker1').datetimepicker({
 				format: 'DD/MM/YYYY',
 				locale: 'es',
-				viewMode: 'years',
-				defaultDate: "1/1/1960"
+				defaultDate: moment()
 
 			});
 			$('#datetimepicker2').datetimepicker({
 				format: 'DD/MM/YYYY',
 				locale: 'es',
-				viewMode: 'years',
-				defaultDate: "1/1/2000"
+				defaultDate: moment()
 			});
 			$("#datetimepicker1").on("dp.change",function (e) {
 				$('#datetimepicker2').data("DateTimePicker").minDate(e.date);
@@ -123,7 +137,7 @@
 			$('#datetimepicker3').datetimepicker({
 				format: 'DD/MM/YYYY',
 				locale: 'es',
-				defaultDate: "1/1/2013"
+				defaultDate: moment()
 			});
 			$('#datetimepicker4').datetimepicker({
 				format: 'DD/MM/YYYY',
