@@ -172,7 +172,7 @@ class DocumentoLicAdmin(admin.ModelAdmin):
         obj.save()
 #*******************************************************************************************************************************
 class DetallePaseInlinePres(admin.TabularInline):
-     model = VwPaseLicitacionCompras
+     model = VwPasePresupuesto
      raw_id_fields = ('documento',)
      readonly_fields = ['documento','fecha_ing','motivo','envio','origen','destino','recepcion','observacion','recibido']
      
@@ -206,7 +206,7 @@ class PaseAdmin(admin.ModelAdmin):
     list_display = ['documento','fecha_ing','motivo','envio','origen','destino','recepcion','observacion','recibido']
     #list_display = ['motivo','recibido','destino']
     raw_id_fields = ['documento']
-    #search_fields = ['documento','destino','envio','destino','recepcion']
+    search_fields = ['documento__descripcion','documento__nro','origen__nombre','desrino__nombre']
     def save_model(self, request, obj, form, change): 
         obj.envio = request.user
         obj.save()

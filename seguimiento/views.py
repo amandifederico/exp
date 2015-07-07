@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 
-#import ho.pisa as pisa
-#import cStringIO as StringIO
-#import cgi
-#from django.template import RequestContext
-#from django.template.loader import render_to_string
-#from django.http import HttpResponse
 #--PDF----------------------------------------------------
+"""import ho.pisa as pisa #esto hay que bajarlo de internet, se puede instalar con easy install - http://pypi.python.org/pypi/pisa/
+import cStringIO as StringIO
+import cgi
+from django.template.loader import *"""
+#--PDF----------------------------------------------------
+
 from seguimiento.models import *
 from django.shortcuts import render
 from django.shortcuts import render_to_response
-from django.template import RequestContext
+from django.template import RequestContext, Template, Context
 from django.http import HttpResponseRedirect, HttpResponse
 #---LOGOUT---
 from django.contrib.auth import REDIRECT_FIELD_NAME, login as auth_login, logout as auth_logout
@@ -28,6 +28,17 @@ from datetime import *
 #    if not pdf.err:
 #        return HttpResponse(result.getvalue(), mimetype='application/pdf')
 #    return HttpResponse('Error al generar el PDF: %s' % cgi.escape(html))
+"""
+def generar_pdf_completo(html,nomb,id,fecha):
+    # Función para generar el archivo PDF y devolverlo mediante HttpResponse
+    result = StringIO.StringIO()
+
+    pisa.CreatePDF(html,result)
+#    pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("UTF-8")), result)
+    response = HttpResponse(result.getvalue(), mimetype ='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename='+nomb+'-'+str(id)+'-'+str(fecha)+'.pdf'
+    return response
+"""
 
 #--------------------------------
 def paginar(objlist,peticion):
@@ -48,6 +59,7 @@ def index(request):
     return render_to_response('index.html',context_instance=RequestContext(request))
 
 #////////////////////////////////////////////////////////////////////////////////////////
+
 #LISTADOS
 def estadisticas(request):
     usr = User.objects.exclude(username = 'admin')
@@ -61,8 +73,10 @@ def listados(request):
 def listDocs(request):
     doc = Documento.objects.all()
     lista = paginar(doc,request)
-    #html = render_to_string('documentos.html', {'pagesize':'A4', 'libro':libro}, context_instance=RequestContext(request,{'doc':doc},))
-    #return generar_pdf(html)
+    """
+    html = render_to_string('documentos.html', {'pagesize':'A4', 'lista':lista},context_instance=RequestContext(request))
+    return generar_pdf_completo(html,'Documentos',0,datetime.now())
+    """
     return render_to_response('documentos.html',context_instance=RequestContext(request,{'lista':lista},))
 
 def listDocsUsr(request, usr):
