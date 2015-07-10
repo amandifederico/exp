@@ -1,45 +1,43 @@
-<div class="header clearfix">
-	<nav >
-	      <div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<img src="{{STATIC_URL}}img/icono.png" height="40" width="40"/><a class="navbar-brand" href="#">- ORGANIZACION -</a>
-			</div>
-			<div id="navbar" class="navbar-collapse collapse">
-			{% if user.is_active and user.is_staff %}
-				
-				<form class="navbar-form navbar-right">
-						{% csrf_token %}
-						<div class="form-group">
-							<p>Usuario: <strong>{% filter force_escape %}{% firstof user.username %}{% endfilter %}</strong> -</p>
-						</div>
-						<div class="form-group">
-							<p><a href="/registration/logged_out.html" class="">Cerrar Sesion</a></p>
-						</div>
-				</form>
-				<ul class="nav nav-pills">
-					<li role="presentation"><a href="/">Inicio</a></li>
-					<li role="presentation"><a href="/admin">Carga</a></li>
-					<li role="presentation"><a href="#">Estadisticas</a></li>
-				</ul>
-			{%else%}
-			  <form class="navbar-form navbar-right" method="post" action="{% url 'django.contrib.auth.views.login' %}">{% csrf_token %}
-			    <div class="form-group">
-			      <input id="id_username" type="text" class="form-control" name="username" placeholder="Username" maxlength="30" >
-			    </div>
-			    <div class="form-group">
-			      <input id="id_password" type="password" class="form-control" name="password" placeholder="Password">
-			    </div>
-			    <input type="submit" class="navbar-btn-login btn" value="Entrar" />
-			    <input type="hidden" name="next" value="/" />
-			  </form>
-			{%endif%}
-			</div><!--/.navbar-collapse -->
-	      </div>
-	</nav>
-</div>
+<nav >
+	<div class="header clearfix container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<img src="{{STATIC_URL}}img/icono.png" height="40" width="40"/><a class="navbar-brand" href="#">- ORGANIZACION -</a>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+		{% if user.is_active and user.is_staff %}
+			<form class="navbar-form navbar-right">
+					{% csrf_token %}
+					<div class="form-group">
+						<p>Usuario: <strong>{% filter force_escape %}{% firstof user.username %}{% endfilter %}</strong> -</p>
+					</div>
+					<div class="form-group">
+						<p><a href="/registration/logged_out.html" class="">Cerrar Sesion</a></p>
+					</div>
+			</form>
+			<ul class="nav nav-pills">
+				<li role="presentation"><a href="/">Inicio</a></li>
+				<li role="presentation"><a href="/admin">Carga</a></li>
+				<li role="presentation"><a href="#">Estadisticas</a></li>
+			</ul>
+		{%else%}
+		  <form class="navbar-form navbar-right" method="post" action="{% url 'django.contrib.auth.views.login' %}">{% csrf_token %}
+		    <div class="form-group">
+		      <input id="id_username" type="text" class="form-control" name="username" placeholder="Username" maxlength="30" >
+		    </div>
+		    <div class="form-group">
+		      <input id="id_password" type="password" class="form-control" name="password" placeholder="Password">
+		    </div>
+		    <input type="submit" class="navbar-btn-login btn" value="Entrar" />
+		    <input type="hidden" name="next" value="/" />
+		  </form>
+		{%endif%}
+		</div><!--/.navbar-collapse -->
+	</div>
+</nav>
+
