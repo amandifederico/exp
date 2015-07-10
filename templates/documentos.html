@@ -5,36 +5,37 @@
 	<div class="warp">
 		<div class="box">
 			<div>
-				<center><h1 class="panel-title">Documentos en transito</h1></center>
+				<center><h2>Documentos en transito</h2></center>
 			</div>
-
-				<table class="table table-striped">
-                    			<thead>
-                        			<tr>
-			                            <th>Descripción</th>
-			                            <th>Tipo</th>
-			                            <th>Fecha Ingreso</th>
-			                            <th>Recepción</th>
-			                            <th>Adjunto</th>
-
-						</tr>
-                    			</thead>
-                    			<tbody>
-					{%for l in lista%}
-						<tr class="{% cycle 'row1' 'row2' %}">
-							<td>{{l.descripcion}}</td>
-							<td>{{l.tipo_doc}}</td>
-							<td>{{l.fecha_ing}}</td>
-							<td>{{l.recepcion}}</td>
-							<td>{{l.adjunto}}</td>
-						</tr>
-					{%endfor%}            
-					</tbody>
-				</table>
-				{% include 'paginador.html' %}
-
+			<table id="example" class="display" cellspacing="0" width="100%">
+				<thead>
+    			<tr>
+    				<th><input id="selectAll" type="checkbox"</th>
+            <th>Descripción</th>
+            <th>Tipo</th>
+            <th>Ingreso</th>
+            <th>Recepción</th>
+            <th>Adjunto</th>
+					</tr>
+  			</thead>
+  			<tbody>
+				{%for l in lista%}
+					<tr class="{% cycle 'row1' 'row2' %}">
+						<td><center><input type="checkbox" class="checkbox-doc editor-active"></center></td>
+						<td>{{l.descripcion}}</td>
+						<td>{{l.tipo_doc}}</td>
+						<td>{{l.fecha_ing}}</td>
+						<td>{{l.recepcion}}</td>
+						<td>{{l.adjunto}}</td>
+					</tr>
+				{%endfor%}            
+				</tbody>
+			</table>
+		
 		</div>
+		<input type=button value="Imprimir" onClick="javascript:window.print()">
 	</div>
+
 {%endif%} 
 {%endblock%}
     
