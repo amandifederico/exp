@@ -1,5 +1,7 @@
 $(document).ready(function() {
   $('#example').DataTable({
+  	paging: false,
+
     "language": {
         "sProcessing":    "Procesando...",
         "sLengthMenu":    "Mostrar _MENU_ registros",
@@ -31,10 +33,20 @@ $(document).ready(function() {
           $('.checkbox-doc').each(function() { //loop through each checkbox
               this.checked = true;  //select all checkboxes with class "checkbox1"              
           });
+          $('table.dataTable tbody tr').removeClass("non-print");
       }else{
           $('.checkbox-doc').each(function() { //loop through each checkbox
               this.checked = false; //deselect all checkboxes with class "checkbox1"                      
-          });        
+          });
+          $('table.dataTable tbody tr').addClass("non-print");
       }
   });
+
+  $('.checkbox-doc').click(function(event) {
+  	if(this.checked) { // check select status
+
+  	}else{
+
+  	}
+  }
 });
