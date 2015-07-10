@@ -206,7 +206,7 @@ class PaseAdmin(admin.ModelAdmin):
     list_display = ['documento','fecha_ing','motivo','envio','origen','destino','recepcion','observacion','recibido']
     #list_display = ['motivo','recibido','destino']
     raw_id_fields = ['documento']
-    search_fields = ['documento__descripcion','documento__nro','origen__nombre','desrino__nombre']
+    search_fields = ['documento__descripcion','documento__nro','origen__nombre','destino__nombre']
     def save_model(self, request, obj, form, change): 
         obj.envio = request.user
         obj.save()

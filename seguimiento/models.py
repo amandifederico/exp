@@ -136,8 +136,28 @@ class VwPaseOtros(models.Model):
     
     class Meta:
         managed = False
-        verbose_name = "Pase Otros"
+        verbose_name = "Pase Otros ENTRADA"
         db_table = 'vw_pase_otros'
+
+class VwPaseOtrosS(models.Model):
+    idpase = models.AutoField(primary_key=True)
+    documento = models.ForeignKey(VwDocumentoOtros,db_column='documento',verbose_name= "Documento")
+    fecha_ing = models.DateField(verbose_name= "Fecha de Ingreso")
+    motivo = models.CharField(max_length=200)
+    envio = models.ForeignKey(User, db_column='envio', related_name='otros_envio_s', blank=True, null=True, default=None)
+    origen = models.ForeignKey(Departamento,db_column='origen',verbose_name= "Origen", related_name="otros_origen_s", related_query_name="otros_origen_s", default=1, editable=False)
+    destino = models.ForeignKey(Departamento,db_column='destino',verbose_name= "Destino",related_name="otros_destino_s", related_query_name="otros_destino_s")
+    recepcion = models.ForeignKey(User, db_column='recepcion', related_name='pase_otros_recepcion_s',blank=True, null=True, default=None)
+    observacion = models.CharField(max_length=200,blank=True, null=True)
+    recibido = models.BooleanField(default=False)
+    
+    def __unicode__(self):
+        return force_unicode(self.motivo)
+    
+    class Meta:
+        managed = False
+        verbose_name = "Pase Otros SALIDA"
+        db_table = 'vw_pase_otros_s'
 
 #=======================================================================================================
 #Tesoreria
@@ -178,8 +198,28 @@ class VwPaseTesoreria(models.Model):
 
     class Meta:
         managed = False
-        verbose_name = "Pase Tesoreria"
+        verbose_name = "Pase Tesoreria ENTRADA"
         db_table = 'vw_pase_tesoreria'
+
+class VwPaseTesoreriaS(models.Model):
+    idpase = models.AutoField(primary_key=True)
+    documento = models.ForeignKey(VwDocumentoTesoreria,db_column='documento',verbose_name= "Documento")
+    fecha_ing = models.DateField(verbose_name= "Fecha de Ingreso")
+    motivo = models.CharField(max_length=200)
+    envio = models.ForeignKey(User, db_column='envio', related_name='tesoreria_envio_s', blank=True, null=True, default=None)
+    origen = models.ForeignKey(Departamento,db_column='origen',verbose_name= "Origen", related_name="tesoreria_origen_s", related_query_name="tesoreria_origen_s",default=2, editable=False)
+    destino = models.ForeignKey(Departamento,db_column='destino',verbose_name= "Destino",related_name="tesoreria_destino_s", related_query_name="tesoreria_destino_s")
+    recepcion = models.ForeignKey(User, db_column='recepcion', related_name='tesoreria_recepcion_s',blank=True, null=True, default=None)
+    observacion = models.CharField(max_length=200,blank=True, null=True)
+    recibido = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return force_unicode(self.motivo)
+
+    class Meta:
+        managed = False
+        verbose_name = "Pase Tesoreria SALIDA"
+        db_table = 'vw_pase_tesoreria_s'
 #=======================================================================================================
 #Mesa de entrada
 #=======================================================================================================
@@ -218,11 +258,31 @@ class VwPaseMesaEnt(models.Model):
         return force_unicode(self.documento)
 
     class Meta:
-        verbose_name = "Pase Mesa Entrada"
+        verbose_name = "Pase Mesa Entrada ENTRADA"
         managed = False
         #db_table = 'vw_pase_mesa_ent'
-        db_table = 'seguimiento_pase'
+        db_table = 'vw_pase_mesa_ent'
         
+class VwPaseMesaEntS(models.Model):
+    idpase = models.AutoField(primary_key=True)
+    documento = models.ForeignKey(VwDocumentoMesaEnt,db_column='documento',verbose_name= "Documento")
+    fecha_ing = models.DateField(verbose_name= "Fecha de Ingreso")
+    motivo = models.CharField(max_length=200)
+    envio = models.ForeignKey(User, db_column='envio', related_name='mesa_ent_envio_s', blank=True, null=True, default=None, editable=False)
+    origen = models.ForeignKey(Departamento,db_column='origen',verbose_name= "Origen", related_name="mesa_ent_origen_s", related_query_name="mesa_ent_origen_s", default=3, editable=False)
+    destino = models.ForeignKey(Departamento,db_column='destino',verbose_name= "Destino",related_name="mesa_ent_destino_s", related_query_name="mesa_ent_destino_s")
+    recepcion = models.ForeignKey(User, db_column='recepcion', related_name='mesa_ent_recepcion_s',blank=True, null=True, default=None)
+    observacion = models.CharField(max_length=200,blank=True, null=True)
+    recibido = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return force_unicode(self.documento)
+
+    class Meta:
+        verbose_name = "Pase Mesa Entrada SALIDA"
+        managed = False
+        #db_table = 'vw_pase_mesa_ent'
+        db_table = 'vw_pase_mesa_ent_s'
 #=======================================================================================================
 #Direccion
 #=======================================================================================================
@@ -261,11 +321,31 @@ class VwPaseDireccion(models.Model):
         return force_unicode(self.motivo)
 
     class Meta:
-        verbose_name = "Pase Direccion"
+        verbose_name = "Pase Direccion ENTRADA"
         managed = False
         #db_table = 'vw_pase_direccion'
-        db_table = 'seguimiento_pase'
+        db_table = 'vw_pase_direccion'
         
+class VwPaseDireccionS(models.Model):
+    idpase = models.AutoField(primary_key=True)
+    documento = models.ForeignKey(VwDocumentoDireccion,db_column='documento',verbose_name= "Documento")
+    fecha_ing = models.DateField(verbose_name= "Fecha de Ingreso")
+    motivo = models.CharField(max_length=200)
+    envio = models.ForeignKey(User, db_column='envio', related_name='direccion_envio_s', blank=True, null=True, default=None, editable=False)
+    origen = models.ForeignKey(Departamento,db_column='origen',verbose_name= "Origen", related_name="direccion_origen_s", related_query_name="direccion_origen_s",default=7, editable=False)
+    destino = models.ForeignKey(Departamento,db_column='destino',verbose_name= "Destino",related_name="direccion_destino_s", related_query_name="direccion_destino_s")
+    recepcion = models.ForeignKey(User, db_column='recepcion', related_name='direccion_recepcion_s',blank=True, null=True, default=None)
+    observacion = models.CharField(max_length=200,blank=True, null=True)
+    recibido = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return force_unicode(self.motivo)
+
+    class Meta:
+        verbose_name = "Pase Direccion SALIDA"
+        managed = False
+        #db_table = 'vw_pase_direccion'
+        db_table = 'vw_pase_direccion_s'
 #=======================================================================================================
 #Patrimonio
 #=======================================================================================================
@@ -306,7 +386,27 @@ class VwPasePatrimonio(models.Model):
     class Meta:
         managed = False
         db_table = 'vw_pase_patrimonio'
-        verbose_name = "Pase Patrimonio"
+        verbose_name = "Pase Patrimonio ENTRADA"
+
+class VwPasePatrimonioS(models.Model):
+    idpase = models.AutoField(primary_key=True)
+    documento = models.ForeignKey(VwDocumentoPatrimonio,db_column='documento',verbose_name= "Documento")
+    fecha_ing = models.DateField(verbose_name= "Fecha de Ingreso")
+    motivo = models.CharField(max_length=200)
+    envio = models.ForeignKey(User, db_column='envio', related_name='patrimonio_envio_s', blank=True, null=True, default=None)
+    origen = models.ForeignKey(Departamento,db_column='origen',verbose_name= "Origen", related_name="patrimonio_origen_s", related_query_name="patrimonio_origen_s",default=6, editable= False)
+    destino = models.ForeignKey(Departamento,db_column='destino',verbose_name= "Destino",related_name="patrimonio_destino_s", related_query_name="patrimonio_destino_s")
+    recepcion = models.ForeignKey(User, db_column='recepcion', related_name='patrimonio_recepcion_s',blank=True, null=True, default=None)
+    observacion = models.CharField(max_length=200,blank=True, null=True)
+    recibido = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return force_unicode(self.motivo)
+
+    class Meta:
+        managed = False
+        db_table = 'vw_pase_patrimonio_s'
+        verbose_name = "Pase Patrimonio SALIDA"
 
 #=======================================================================================================
 #Licitacion y compras
@@ -348,7 +448,27 @@ class VwPaseLicitacionCompras(models.Model):
     class Meta:
         managed = False
         db_table = 'vw_pase_lic_com'
-        verbose_name = "Pase Licitacion y Compras"
+        verbose_name = "Pase Licitacion y Compras ENTRADA"
+
+class VwPaseLicitacionComprasS(models.Model):
+    idpase = models.AutoField(primary_key=True)
+    documento = models.ForeignKey(VwDocumentoLicitacionCompras,db_column='documento',verbose_name= "Documento")
+    fecha_ing = models.DateField(verbose_name= "Fecha de Ingreso")
+    motivo = models.CharField(max_length=200)
+    envio = models.ForeignKey(User, db_column='envio', related_name='lic_com_envio_s', blank=True, null=True, default=None)
+    origen = models.ForeignKey(Departamento,db_column='origen',verbose_name= "Origen", related_name="lic_com_origen_s", related_query_name="lic_com_origen_s",default=5, editable=False)
+    destino = models.ForeignKey(Departamento,db_column='destino',verbose_name= "Destino",related_name="lic_com_destino_s", related_query_name="lic_com_destino_s")
+    recepcion = models.ForeignKey(User, db_column='recepcion', related_name='lic_com_recepcion_s',blank=True, null=True, default=None)
+    observacion = models.CharField(max_length=200,blank=True, null=True)
+    recibido = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return force_unicode(self.motivo)
+
+    class Meta:
+        managed = False
+        db_table = 'vw_pase_lic_com_s'
+        verbose_name = "Pase Licitacion y Compras SALIDA"
 #=======================================================================================================
 #Ejecucion Presupuestaria
 #=======================================================================================================
@@ -389,4 +509,24 @@ class VwPasePresupuesto(models.Model):
     class Meta:
         managed = False
         db_table = 'vw_pase_presupuesto'
-        verbose_name = "Pase Presupuesto"
+        verbose_name = "Pase Presupuesto ENTRADA"
+
+class VwPasePresupuestoS(models.Model):
+    idpase = models.AutoField(primary_key=True)
+    documento = models.ForeignKey(VwDocumentoPresupuesto,db_column='documento',verbose_name= "Documento")
+    fecha_ing = models.DateField(verbose_name= "Fecha de Ingreso")
+    motivo = models.CharField(max_length=200)
+    envio = models.ForeignKey(User, db_column='envio', related_name='presupuesto_envio_s', blank=True, null=True, default=None)
+    origen = models.ForeignKey(Departamento,db_column='origen',verbose_name= "Origen", related_name="presupuesto_origen_s", related_query_name="presupuesto_origen_s",default=4, editable=False)
+    destino = models.ForeignKey(Departamento,db_column='destino',verbose_name= "Destino",related_name="presupuesto_destino_s", related_query_name="presupuesto_destino_s")
+    recepcion = models.ForeignKey(User, db_column='recepcion', related_name='presupuesto_recepcion_s',blank=True, null=True, default=None)
+    observacion = models.CharField(max_length=200,blank=True, null=True)
+    recibido = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return force_unicode(self.motivo)
+
+    class Meta:
+        managed = False
+        db_table = 'vw_pase_presupuesto_s'
+        verbose_name = "Pase Presupuesto SALIDA"
