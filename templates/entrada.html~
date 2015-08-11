@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if user.is_active and user.is_staff %}
+	<div class="">
+		<center><h2>Entrada de direccion:[NOMBRE DIRECCION]</h2></center>
+		<table class="table listado">
+			<thead>
+    				<tr>
+					<th>Descripción</th>
+					<th>Fecha</th>
+					<th>Tipo</th>
+					<th>Adjunto</th>
+				</tr>
+  			</thead>
+			<tbody>
+				<tr class="{% cycle 'row1' 'row2' %}">
+					<td>sdfsd</td>
+					<td>uityty</td>
+					<td>5675659</td>
+					<td>iopjtj</td>
+				</tr>
+				<tr class="{% cycle 'row1' 'row2' %}">
+					<td>sdfsd</td>
+					<td>uityty</td>
+					<td>5675659</td>
+					<td>iopjtj</td>
+				</tr>
+				<tr class="{% cycle 'row1' 'row2' %}">
+					<td>sdfsd</td>
+					<td>uityty</td>
+					<td>5675659</td>
+					<td>iopjtj</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+	{% block script %}
+	<script>
+	</script>
+	{%endblock%}
+	{% endif %}
+{%endblock%}
+    

@@ -65,6 +65,10 @@ def estadisticas(request):
     usr = User.objects.exclude(username = 'admin')
     return render_to_response('estadisticas.html',context_instance=RequestContext(request,{'usr':usr},))
 
+def entrada(request):
+    usr = User.objects.exclude(username = 'admin')
+    return render_to_response('entrada.html',context_instance=RequestContext(request,{'usr':usr},))
+
 def listados(request):
     usr = User.objects.exclude(username = 'admin')
 
