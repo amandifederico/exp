@@ -7,3 +7,20 @@
 .btn-listar{
 	width:100%;
 }
+
+
+@media print {
+  .non-print { 
+  	display: none;
+  }
+
+  .dataTables_filter{
+  	display: none;	
+  }
+
+  #example_info{
+  	display: none;	
+  }
+
+  
+}
