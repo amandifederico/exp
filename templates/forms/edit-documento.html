@@ -1,0 +1,21 @@
+{% extends "forms/form_base.html" %}
+
+{% block titulo-form %}
+	{{name}}
+{% endblock %}
+
+{% block action-form %}
+	"/demo/my-account/edit-mobile/" + {{f.id_mobile}}
+{% endblock %}
+
+{% block form-content %}
+   	{% csrf_token %}
+	{% for f in form %}
+		<div class="control-group">
+			<label class="control-label" for="input{{f.label}}">{{f.label}}</label>
+			<div class="controls">
+				{{f}}
+			</div>
+		</div>
+	{% endfor %}
+{% endblock %}

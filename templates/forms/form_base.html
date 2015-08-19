@@ -1,17 +1,19 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block script %}
-	{% include 'extrascript.html' %}
-	<script type="text/javascript"> Cufon.now(); </script>
-{% endblock %}
-
-{% block body-article1%}
-	<div class="wrap">
-		<div class="box">
-			{% block titulo-form %}
-			{% endblock %}
-			{% block contenido-form %}
-			{% endblock %}
+{% block content %}
+	<form class=""  method="post" action="{% block action-form %}{% endblock %}" onsubmit="{% block submit-form %}{% endblock %}" onclick="{% block onclick-form %} {% endblock %}">          
+		
+		<!-- Titulo Form -->
+		<div class="span offset1">
+			<h1><small>	
+				{% block titulo-form %}
+				{% endblock %}
+			</small></h1>
 		</div>
-	</div>
+		<!-- Contenido Form -->                
+		{% block form-content %}
+		{% endblock %}
+		
+	</form>
 {% endblock %}

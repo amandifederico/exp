@@ -1,0 +1,20 @@
+{% extends "forms/form_base.html" %}
+{% load i18n %}
+
+{% block titulo-form %}
+	{{name}}
+{% endblock %}
+
+{% block form-content %}
+   	<form action="" method="post" >
+            {% csrf_token %}
+            {% if form.is_valid %}
+                {{ form.as_p }}
+                <h2>Cleaned Data</h2>
+                {{ form.cleaned_data }}
+            {% else %}
+                {{ form.as_p }}
+            {% endif %}
+            <button class="btn">Submit</button>
+        </form>
+{% endblock %}

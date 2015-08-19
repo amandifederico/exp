@@ -12,6 +12,8 @@ from django.shortcuts import render
 from django.shortcuts import render_to_response
 from django.template import RequestContext, Template, Context
 from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth.decorators import login_required
+from seguimiento.forms import *
 #---LOGOUT---
 from django.contrib.auth import REDIRECT_FIELD_NAME, login as auth_login, logout as auth_logout
 from django.template.response import TemplateResponse
@@ -115,6 +117,45 @@ def listDocsFecha(request,d1,m1,a1,d2,m2,a2,opc):
 #    doc = Documento.object.filter(recepcion = idusr)
 #    return render_to_response('',context_instance=RequestContext(request))
 
+
+#FORMS///////////////////////////////////////////////////////////////////////////////////
+@login_required
+def addDocumento(request):
+    user = request.user
+    name = 'Agregar Documento'
+    if request.POST:
+        try:
+            form = formDocumento(request.POST)
+        except ValueError:
+            form = formDocumento(request.POST)
+        if form.is_valid():
+            form.save()
+            url = 'index/'
+            return HttpResponseRedirect(url)  
+    else:
+        form = formDocumento(request.POST)
+    return render_to_response('forms/add-documento.html',context_instance=RequestContext(request,{'form':form, 'name':name},))
+
+@login_required
+def editDocumento(request, id):
+    name = 'Editar Documento'
+    doc = Documento.objects.get(pk=id)
+    if request.POST:
+        try:
+            form = formDocumento(data=request.POST, instance=doc)
+        except ValueError:
+            form = formDocumento(data=request.POST, instance=doc)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect("index/")  
+    else:
+        form = formDocumento(instance=doc)
+        return render_to_response('forms/edit-documento.html',context_instance=RequestContext(request,{'form':form, 'name':name},))
+
+@login_required
+def removeDocumento(request, id):
+    doc = Documento.objects.get(pk=id).delete()
+    return HttpResponseRedirect("index/")
 
 #////////////////////////////////////////////////////////////////////////////////////////
 def logout(request, next_page=None, template_name='registration/logged_out.html',redirect_field_name=REDIRECT_FIELD_NAME, current_app=None, extra_context=None):

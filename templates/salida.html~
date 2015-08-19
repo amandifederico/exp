@@ -3,7 +3,7 @@
 {% block content %}
 {% if user.is_active and user.is_staff %}
 	<div class="">
-		<center><h2>Entrada de direccion : [NOMBRE DIRECCION]</h2></center>
+		<center><h2>SALIDA de direccion : [NOMBRE DIRECCION]</h2></center>
 		<table class="table listado">
 			<thead>
     				<tr>
