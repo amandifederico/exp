@@ -7,3 +7,9 @@ class formDocumento(forms.ModelForm):
         model = Documento
     def is_valid(self):
         return True
+
+class formPase(forms.ModelForm):
+    class Meta:
+        model = Pase
+    def is_valid(self):
+        return True
